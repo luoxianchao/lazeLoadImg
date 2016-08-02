@@ -27,10 +27,15 @@ var lazyLoad = (function () {
     }
 
     function getScrollTop() {
+        var userAgent = navigator.userAgent;//取得浏览器的名称
         if (document.compatMode == "BackCompat") {
             var elementScrollTop = document.documentElement.scrollTop;
         } else {
-            var elementScrollTop = document.body.scrollTop;
+            if(userAgent.indexOf("Firefox") > -1){//火狐浏览器取得滚动条的距离
+                var elementScrollTop = document.documentElement.scrollTop;
+            }else{
+                var elementScrollTop = document.body.scrollTop;
+            }
         }
         return elementScrollTop;
     }
